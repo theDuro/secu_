@@ -19,7 +19,7 @@ public class UserRepository {
 
     public boolean checkLogin(final String login, final String password)throws Exception {
         for(int i = 1;i<=usersDatabase.size();i++){
-           if(usersDatabase.get(i).getLogin() == login){
+           if(usersDatabase.get(i).getLogin().contains(login)){
                if(usersDatabase.get(i).getIncorrectLoginCounter()>2) throw new Exception();//np AttackLoginException ale wolałem nie kombinować
                if(usersDatabase.get(i).getPassword()==password){
                    usersDatabase.get(i).resetIncorrectLoginCounter();
