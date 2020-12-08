@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UserRepository {
-
+    final int MAXIMUM_OF_BAD_LOGIN = 2;
     private final Map<Integer, User> usersDatabase;
 
     public UserRepository() {
@@ -20,12 +20,13 @@ public class UserRepository {
     public boolean checkLogin(final String login, final String password)throws Exception {
         for(int i = 1;i<=usersDatabase.size();i++){
            if(usersDatabase.get(i).getLogin().contains(login)){
-               if(usersDatabase.get(i).getIncorrectLoginCounter()>2) throw new Exception();//np AttackLoginException ale wolałem nie kombinować
+               if(usersDatabase.get(i).getIncorrectLoginCounter()>MAXIMUM_OF_BAD_LOGIN) throw new Exception();//np AttackLoginException ale wolałem nie kombinować
                if(usersDatabase.get(i).getPassword().contains(password)){
                    usersDatabase.get(i).resetIncorrectLoginCounter();
 
                    return true;}
                 usersDatabase.get(i).addIncorrectLoginCounter();
+               //tutaj jest zreowany;
            }
         }
         return false;
