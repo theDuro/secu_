@@ -1,6 +1,7 @@
 package com.example.demo.rest;
 
 import com.example.demo.dto.LoginDto;
+import com.example.demo.exceptionFiles.AttackOnLoginException;
 import com.example.demo.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +30,7 @@ public class UserApiController {
                     return new ResponseEntity<>(HttpStatus.OK);
                 }
                 return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-            }catch (Exception e) {
+            }catch (AttackOnLoginException e) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
 

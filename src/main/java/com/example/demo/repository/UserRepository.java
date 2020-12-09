@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import com.example.demo.exceptionFiles.AttackOnLoginException;
 import com.example.demo.model.User;
 
 import java.util.HashMap;
@@ -17,10 +18,10 @@ public class UserRepository {
         usersDatabase.put(3, new User("silver", "$silver$", true, 0));
     }
 
-    public boolean checkLogin(final String login, final String password)throws Exception {
+    public boolean checkLogin(final String login, final String password)throws AttackOnLoginException  {
         for(int i = 1;i<=usersDatabase.size();i++){
            if(usersDatabase.get(i).getLogin().contains(login)){
-               if(usersDatabase.get(i).getIncorrectLoginCounter()>MAXIMUM_OF_BAD_LOGIN) throw new Exception();//np AttackLoginException ale wolałem nie kombinować
+               if(usersDatabase.get(i).getIncorrectLoginCounter()>MAXIMUM_OF_BAD_LOGIN) throw new AttackOnLoginException();
                if(usersDatabase.get(i).getPassword().contains(password)){
                    usersDatabase.get(i).resetIncorrectLoginCounter();
 
